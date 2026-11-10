@@ -22,7 +22,7 @@ requirements:
   run:
     - python
     - cyclopts >=4.0.0
-    - matplotlib >=3.0.1
+    - matplotlib-base >=3.0.1
     - numpy >=1.21.0
     - pillow
     - pooch
@@ -32,6 +32,11 @@ requirements:
     - typing-extensions >=4.10
     - vtk >=9.3.1,<9.8.0,!=9.4.0,!=9.4.1
 
+# The PyPI sdist omits the tests package and supporting files (including
+# tests/__init__.py, tests/conftest.py, and test helper modules), so these
+# tests fail during collection because their `tests.*` imports cannot resolve.
+# Also tests depends on packages which not in `main` - as example `meshio`
+# Run `pip check` only for the moment.
 test:
   imports:
     - pyvista
